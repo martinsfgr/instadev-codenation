@@ -5,6 +5,7 @@ import './Post.scss';
 
 const Post = ({ postInfo, userInfo }) => {
   const [like, setLike] = useState(false);
+  const [follow, setFollow] = useState(false);
 
   return (
     <article className="post" data-testid="post">
@@ -18,6 +19,13 @@ const Post = ({ postInfo, userInfo }) => {
             {userInfo.name}
           </Link>
         </div>
+
+        <button className="post__context" onClick={() => setFollow(!follow)}>
+          {follow 
+            ? <span className="follow-btn is-following">Seguindo</span>
+            : <span className="follow-btn">Seguir</span>
+          }
+        </button>
       </header>
 
       <figure className="post__figure">
@@ -35,7 +43,6 @@ const Post = ({ postInfo, userInfo }) => {
           </div>
         </div>
       </nav>
-
     </article>
   );
 };
