@@ -9,15 +9,9 @@ import NewUserRoute from './NewUserRoute';
 const Routes = () => (
   <Switch>
     <Route exact path="/" component={FeedRoute} />
-
     <Route exact path="/users" component={UsersRoute} />
-
-    <Route path="/users/:username">
-
-    </Route>
-
+    <Route path="/users/:username" component={ProfileRoute} />
     <Route path="/newuser">
-
     </Route>
   </Switch>
 );
