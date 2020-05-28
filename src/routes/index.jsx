@@ -10,9 +10,7 @@ const Routes = () => (
   <Switch>
     <Route exact path="/" component={FeedRoute} />
 
-    <Route exact path="/users">
-
-    </Route>
+    <Route exact path="/users" component={UsersRoute} />
 
     <Route path="/users/:username">
 
