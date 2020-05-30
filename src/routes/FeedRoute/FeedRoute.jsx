@@ -11,6 +11,7 @@ const FeedRoute = () => {
   const [users, setUsers] = useState([]);
   const [posts, setPosts] = useState([]);
   const [usersFetched, setUsersFetched] = useState(0);
+  const [stories, setStories] = useState([]);
 
   const getUserPostById = (id) => users.find(user => id === user.id);
 
@@ -33,10 +34,26 @@ const FeedRoute = () => {
       });
   }, [users, usersFetched]);
 
-  console.log(posts)
+  useEffect(() => {
+    fetch('https://5e7d0266a917d70016684219.mockapi.io/api/v1/stories')
+      .then((res) => res.json())
+      .then(data => {
+        setStories(data);
+      });
+  }, [users]);
+
+  console.log(users);
+  console.log(stories);
 
   return (
     <div data-testid="feed-route">
+      {(stories.length > 0) && (
+        <Stories
+          stories={stories}
+          getUserHandler={getUserPostById}
+        />
+      )}
+
       {users.length !== usersFetched
         ? (<Loading />)
         : (<Posts 
