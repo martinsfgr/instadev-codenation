@@ -7,8 +7,6 @@ import profilePlaceholder from '../../assets/img/profile-placeholder.png';
 const User = ({ infoUser })  => {
   const {avatar, name, username, } = infoUser;
 
-  
-
   return (
     <article className="post" data-testid="user">
       <header className="post__header">
