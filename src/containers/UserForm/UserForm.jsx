@@ -119,6 +119,8 @@ const UserForm = () => {
           </div>
         </div>
       </section>
+            
+      {submit && (<SuccessMessage />)}
     </React.Fragment>
   );
 };
