@@ -36,7 +36,35 @@ const Story = ({ story, user, handleClose }) => {
             <i className="fas fa-times" />
           </button>
         </header>
+
+        <div className="story__progress">
+          <div
+            style={{ width: updateProgress()}}
+            className="story__progress__elapsed"
+          />
+        </div>
       </div>
+
+      {story.videoUrl && (
+        <div className="container">
+          <section className="story__video__wrapper">
+            <video
+              autoPlay
+              className="video-player"
+              playsInline
+              onTimeUpdate={e => setCurrentTime(e.target.currentTime)}
+              onLoadedMetadata={e => {
+                setMetadata({
+                  videoHeight: e.target.videoHeight,
+                  videoWidth: e.target.videoWidth,
+                  duration: e.target.duration
+                });
+              }}
+              src={story.videoUrl}
+            />
+          </section>
+        </div>
+      )}
     </section>
   );
 };
