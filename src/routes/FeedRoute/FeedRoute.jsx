@@ -42,9 +42,6 @@ const FeedRoute = () => {
       });
   }, [users]);
 
-  console.log(users);
-  console.log(stories);
-
   return (
     <div data-testid="feed-route">
       {(stories.length > 0) && (

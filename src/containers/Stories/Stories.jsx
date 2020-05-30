@@ -4,7 +4,21 @@ import Story from '../../components/Story';
 
 import './Stories.scss';
 
-const Stories = ({ stories, getUserHandler, showStory }) => {
+const Stories = ({ stories, getUserHandler }) => {
+  const [showStory, setShowStory] = useState(false);
+  const [selectedStory, setSelectedHistory] = useState({});
+  const [selectedProfile, setSelectedProfile] = useState({});
+
+  const findStoryById = (id) => stories.find(story => story.id === id);
+
+  const handleStory = (story) => {
+    const foundStory = findStoryById(story.id);
+    const profileData = getUserHandler(story.userId);
+
+    setSelectedProfile(profileData);
+    setSelectedHistory(foundStory);
+    setShowStory(!showStory);
+  };
 
   return (
     <React.Fragment>
@@ -14,7 +28,11 @@ const Stories = ({ stories, getUserHandler, showStory }) => {
             const profileData = getUserHandler(story.userId);
 
             return (
-              <button key={story.id} className='user__thumb user__thumb--hasNew'>
+              <button 
+                key={story.id} 
+                className='user__thumb user__thumb--hasNew' 
+                onClick={() => handleStory(story)}
+              >
                 <div className="user__thumb__wrapper">
                   {profileData?.avatar 
                     ? <img src={profileData?.avatar} alt={profileData?.name} />
@@ -28,7 +46,11 @@ const Stories = ({ stories, getUserHandler, showStory }) => {
       </section>
 
       {showStory && (
-        <Story />
+        <Story
+          story={selectedStory}
+          user={selectedProfile}
+          handleClose={() => setShowStory(!showStory)}
+        />
         )}
     </React.Fragment>
   );
